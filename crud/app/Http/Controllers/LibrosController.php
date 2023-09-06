@@ -62,11 +62,11 @@ class LibrosController extends Controller
     public function edit($id)
     {
         //
-        $libros=new libros;
+        $libros=libros::find($id)->get();
         $libros=libros::findOrFail($id);
         $Categorias=categorias::all();
         
-        return view('libros.edit', compact('Categorias'));
+        return view('libros.edit', compact('Categorias'))->with('libros', $libros);
     }
 
     /**
