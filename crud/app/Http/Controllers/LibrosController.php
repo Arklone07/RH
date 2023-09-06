@@ -59,39 +59,54 @@ class LibrosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(libros $libros)
+    public function edit($id)
     {
         //
         $libros=new libros;
-        $libros->Categoria_id=$request->input('Categoria_id');
-        $libros->Nombre=$request->input('Nombre');
-        $libros->save();
-        return redirect('libros')->with('mensaje','Libro agregada con éxito, que bien se siente Ken');
+        $libros=libros::findOrFail($id);
+        $Categorias=categorias::all();
+        
+        return view('libros.edit', compact('Categorias'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, libros $libros)
+    public function update(Request $request, $id)
     {
         //
-        $libros=new libros;
-        $libros->Categoria_id=$request->input('Categoria_id');
-        $libros->Nombre=$request->input('Nombre');
-        $libros->save();
-        return redirect('libros')->with('mensaje','Libro agregada con éxito, que bien se siente Ken');
+
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+
+        $this->validate($request, $campos, $mensaje);
+
+        $datosLibros = request()->except(['_token','_method']);
+
+        
+        $libros=libros::findOrFail($id);
+
+        /* $libros->Categoria_id=$request->input('Categoria_id');
+        $libros->Nombre=$request->input('Nombre'); */
+        libros::where('id','=',$id)->update($datosLibros);
+
+        $libros=libros::findOrFail($id);
+
+        return redirect('libros')->with('mensaje','Libro modificado Ken');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(libros $libros)
+    public function destroy($id)
     {
         //
-        $libros=new libros;
-        $libros->Categoria_id=$request->input('Categoria_id');
-        $libros->Nombre=$request->input('Nombre');
-        $libros->save();
-        return redirect('libros')->with('mensaje','Libro agregada con éxito, que bien se siente Ken');
+        $libros=libros::findOrFail($id);
+        libros::destroy($id);
+        return redirect('libros')->with('mensaje','Libro borrado, no era lo suficientemente bueno Ken');
     }
 }

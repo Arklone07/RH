@@ -14,6 +14,6 @@ class libros extends Model
     public $timestamps=false;
 
     public function categorias(){
-        return this->hasOne(Categorias::class,'id','Categoria_id');
+        return $this->hasOne(Categorias::class,'id','Categoria_id');
     }
 }
