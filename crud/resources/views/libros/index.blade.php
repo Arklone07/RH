@@ -11,6 +11,7 @@
     @endif
 
 <a href="{{ url('libros/create')}}" class="btn btn-success"> Registrar nueva libro </a>
+<a href="{{ url('libros/pdf')}}" class="btn btn-success"> Crear pdf </a>
 <br>
 <br>
 <table class="table table-light">

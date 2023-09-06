@@ -24,6 +24,11 @@ class LibrosController extends Controller
         return view('libros.index',$Datos, compact('Categorias'));
     }
 
+/*     public function pdf()
+    {
+        
+    } */
+
     /**
      * Show the form for creating a new resource.
      */
@@ -51,9 +56,14 @@ class LibrosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(libros $libros)
+    public function show()
     {
         //
+        $libros=new libros;
+        $Libros=libros::all();
+        $Categorias=categorias::all();
+        $Datos['libros']=libros::paginate(5);
+        return view('libros.pdf', $Datos, compact('Categorias'));
     }
 
     /**

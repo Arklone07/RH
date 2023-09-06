@@ -40,6 +40,8 @@ Route::resource('libros',LibrosController::class)->middleware('auth');
 
 Route::get('/home', [LibrosController::class, 'index'])->name('home');
 
+Route::get('/home/libros/pdf', [LibrosController::class, 'pdf'])->name('libros.pdf');
+
 Route::group(['middleware'=>'auth'], function () {
     Route::get('/', [EmpleadoController::class, 'index'])->name('home');
 });
