@@ -29,7 +29,7 @@
               
         <tr>
             <td>{{ $Libro->id}}</td>
-            <td>{{ $Libro->Categoria_id}}</td>
+            <td>{{ $Libro->categorias->Nombre}}</td>
             <td>{{ $Libro->Nombre}}</td>
             
             <td>

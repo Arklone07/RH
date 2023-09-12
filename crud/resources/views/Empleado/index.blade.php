@@ -10,7 +10,7 @@
     </div>
     @endif
 
-<a href="{{ url('Empleado/create')}}" class="btn btn-success"> Registrar nuevo Ken </a>
+<a href="{{ url('Empleado/create')}}" class="btn btn-success"> Registrar nuevo empleado </a>
 <br>
 <br>
 <table class="table table-light">

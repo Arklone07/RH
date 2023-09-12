@@ -4,11 +4,11 @@
 <div class="container">
 
 
-    @if(Session::has('mensaje'))
+{{--     @if(Session::has('mensaje'))
     <div class="alert alert-success" role="alert">
     {{ Session::get('mensaje')}}
     </div>
-    @endif
+    @endif --}}
     <table class="table table-light">
 
         <thead class="thead-light">
@@ -23,7 +23,7 @@
                   
             <tr>
                 <td>{{ $Libro->id}}</td>
-                <td>{{ $Libro->Categoria_id}}</td>
+                <td>{{ $Libro->Categoria}}</td>
                 <td>{{ $Libro->Nombre}}</td>
 
             </tr>
@@ -31,6 +31,6 @@
             @endforeach 
         </tbody>
     </table>
-    {!! $libros->links() !!}  
+    {{-- {!! $libros->links() !!}   --}}
 </div>
 @endsection

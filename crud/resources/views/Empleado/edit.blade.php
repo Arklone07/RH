@@ -6,7 +6,7 @@
 <form action="{{ url('/Empleado/'.$empleado->id)}}" method="post" enctype="multipart/form-data">
 @csrf
 {{ method_field('PATCH') }}
-@include('Empleado.form',['modo'=>'Actualizar Ken'])
+@include('Empleado.form',['modo'=>'Actualizar Empleado'])
 
 </form>
 </div>

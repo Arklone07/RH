@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\libros;
 use App\Models\categorias;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class LibrosController extends Controller
 {
@@ -56,14 +58,48 @@ class LibrosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(/* $pagina */)
     {
         //
         $libros=new libros;
-        $Libros=libros::all();
+        $Libros=libros::all(); 
         $Categorias=categorias::all();
         $Datos['libros']=libros::paginate(5);
-        return view('libros.pdf', $Datos, compact('Categorias'));
+/* 
+        switch($pagina){
+            case 'pagina1':      */
+                $libros = DB::select('EXEC PDFCreature');
+                $pdf = PDF::loadView('libros.pdf', compact('Categorias', array($Datos = 'libros')));
+                return $pdf->stream('invoice.pdf');
+/*                 break;
+            case 'pagina2':
+                return view('libros.index');
+                break;
+            default:
+                abort(404); // Página no encontrada si el parámetro no coincide con ninguna página existente
+        } */
+        
+
+        /* $pdf = Pdf::loadView('libros.pdf',['libros'=>$libros], compact('Categorias', array($Datos = 'libros')));
+        return $pdf->loadHTML('invoice.pdf'); */
+        
+         /* return view('libros.pdf', $Datos, compact('Categorias')); */ 
+
+         /* public function show($pagina){
+            switch($pagina){
+                case 'pagina1':     
+                    $usuarios = DB::select('EXEC ObtenerUsuarios');
+                    $pdf = PDF::loadView('usuarios.pdf', compact('usuarios'));
+                    return $pdf->stream('usuarios.pdf');
+                    break;
+                case 'pagina2':
+                    return view('usuarios.prueba');
+                    break;
+                default:
+                    abort(404); // Página no encontrada si el parámetro no coincide con ninguna página existente
+            }
+    
+        } */
     }
 
     /**

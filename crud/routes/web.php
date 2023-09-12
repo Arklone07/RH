@@ -42,6 +42,10 @@ Route::get('/home', [LibrosController::class, 'index'])->name('home');
 
 Route::get('/home/libros/pdf', [LibrosController::class, 'pdf'])->name('libros.pdf');
 
+Route::get('/read', function(){
+    dump(DB::select('EXEC PDFCreature'));
+});
+
 Route::group(['middleware'=>'auth'], function () {
     Route::get('/', [EmpleadoController::class, 'index'])->name('home');
 });
